@@ -1,3 +1,3 @@
-# @teddi/lodash
+# teddi-lodash
 
 game lib

@@ -13,7 +13,7 @@ import copyArray from './.internal/copyArray'
  * shuffle([1, 2, 3, 4])
  * // => [4, 1, 3, 2]
  */
-function shuffle(array) {
+ export const shuffle=(array)=> {
   const length = array == null ? 0 : array.length
   if (!length) {
     return []
@@ -29,5 +29,3 @@ function shuffle(array) {
   }
   return result
 }
-
-export default shuffle
