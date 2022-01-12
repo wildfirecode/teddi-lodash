@@ -1,6 +1,6 @@
 //https://www.npmjs.com/package/react-countdown
 interface ICountDonwOptions {
-    date: number;
+    date?: number;
     onTick?: Function
     onStart?: Function;
     onPause?: Function;
@@ -10,17 +10,31 @@ interface ICountDonwOptions {
 
 export class CountDown {
     private _options: ICountDonwOptions
+
     private _lastTimer: number = -1;
     private _tickTimer = -1;
+
     private _animationFrameId: number;
     constructor(options: ICountDonwOptions) {
         this._options = Object.assign({
-            intervalDelay: 1000
+            intervalDelay: 1000,
+            date: Date.now() + 3600 * 1000
         }, options);
     }
 
-    start() {
+    private _updateOption(options: ICountDonwOptions) {
+        this._options = Object.assign(this._options, options);
+    }
+
+    start(options?: ICountDonwOptions) {
+        options && this._updateOption(options);
         this._update();
+    }
+
+    stop() {
+        cancelAnimationFrame(this._animationFrameId);
+        this._lastTimer = -1;
+        this._tickTimer = -1;
     }
 
     private _update = () => {
